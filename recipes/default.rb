@@ -21,7 +21,14 @@
 
 case node[:platform]
 when "debian", "ubuntu"
-  erlpkg = node[:erlang][:gui_tools] ? "erlang" : "erlang-nox"
+  erlpkg = case
+           when node[:erlang][:hipe]
+             "erlang-base-hipe"
+           when !node[:erlang][:gui_tools]
+             "erlang-nox"
+           else
+             "erlang"
+
   package erlpkg
   package "erlang-dev"
 when "redhat", "centos", "scientific"
