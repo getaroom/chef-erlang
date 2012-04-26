@@ -28,6 +28,7 @@ when "debian", "ubuntu"
              "erlang-nox"
            else
              "erlang"
+           end
 
   package erlpkg
   package "erlang-dev"
