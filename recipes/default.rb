@@ -21,7 +21,10 @@
 
 case node[:platform]
 when "debian", "ubuntu"
-  package "erlang-base-hipe" if node[:erlang][:hipe]
+  package "erlang-base-hipe" do
+    action :remove unless node[:erlang][:hipe]
+  end
+
   erlpkg = node[:erlang][:gui_tools] ? "erlang" : "erlang-nox"
   package erlpkg
   package "erlang-dev"
